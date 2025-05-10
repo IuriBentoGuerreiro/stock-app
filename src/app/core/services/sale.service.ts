@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SaleService {
-private baseUrl = 'https://localhost:8080/sales';
+private baseUrl = 'http://localhost:8082/sales';
 
   constructor(private http: HttpClient) { }
 

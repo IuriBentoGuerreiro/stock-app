@@ -1,0 +1,112 @@
+$product-background: #f5f5f5;
+$product-card-background: #ffffff;
+$product-primary: #4caf50;
+$product-secondary: #ff7043;
+$product-danger: #e53935;
+$product-text-primary: #333333;
+$product-text-secondary: #666666;
+
+.product-list-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: $product-background;
+
+  h1 {
+    font-size: 26px;
+    font-weight: bold;
+    color: $product-text-primary;
+    margin-bottom: 20px;
+  }
+
+  .product-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+      background-color: $product-card-background;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease-in-out;
+
+      &:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      }
+
+      .product-card-header {
+        display: flex;
+        align-items: center;
+        padding: 16px;
+        background-color: $product-primary;
+        color: #fff;
+        border-radius: 8px 8px 0 0;
+
+        mat-icon {
+          margin-right: 8px;
+          font-size: 24px;
+        }
+
+        span {
+          font-size: 20px;
+          font-weight: bold;
+        }
+      }
+
+      .product-card-body {
+        padding: 16px;
+        font-size: 14px;
+        color: $product-text-secondary;
+
+        p {
+          margin: 10px 0;
+        }
+
+        strong {
+          color: $product-text-primary;
+        }
+      }
+
+      .product-card-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        padding: 12px 16px;
+        background-color: $product-background;
+        border-radius: 0 0 8px 8px;
+
+        button {
+          display: flex;
+          align-items: center;
+          padding: 10px 18px;
+          font-size: 14px;
+          font-weight: bold;
+          color: #fff;
+          border: none;
+          border-radius: 25px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+          mat-icon {
+            margin-right: 6px;
+            font-size: 18px;
+          }
+
+          &:hover {
+            background-color: darken($product-primary, 8%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          }
+
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba($product-primary, 0.4);
+          }
+        }
+      }
+    }
+  }
+}
