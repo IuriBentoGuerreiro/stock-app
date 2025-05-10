@@ -1,0 +1,51 @@
+<header class="header">
+    <div class="logo">
+      <a routerLink="/home">
+        <mat-icon class="logo-home">home</mat-icon>
+      </a>
+    </div>
+  
+    <nav class="nav">
+      <div class="dropdown">
+        <button mat-button [matMenuTriggerFor]="vendasMenu">
+          <span>Vendas</span>
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
+        <mat-menu #vendasMenu="matMenu">
+          <button mat-menu-item routerLink="/products-list">
+            <mat-icon>list</mat-icon>
+            <span>Histórico</span>
+          </button>
+          <button mat-menu-item routerLink="/sales/new">
+            <mat-icon>add_shopping_cart</mat-icon>
+            <span>Nova Venda</span>
+          </button>
+        </mat-menu>
+      </div>
+  
+      <div class="dropdown">
+        <button mat-button [matMenuTriggerFor]="perfilMenu">
+          <span>Perfil</span>
+          <mat-icon>account_circle</mat-icon>
+        </button>
+        <mat-menu #perfilMenu="matMenu">
+          <button mat-menu-item routerLink="/login">
+            <mat-icon>login</mat-icon>
+            <span>Login</span>
+          </button>
+          <button mat-menu-item routerLink="/register">
+            <mat-icon>person_add</mat-icon>
+            <span>Cadastrar-se</span>
+          </button>
+        </mat-menu>
+      </div>
+  
+      <ng-template #loggedMenu>
+        <div class="dropdown">
+          <mat-menu #userMenu="matMenu">
+          </mat-menu>
+        </div>
+      </ng-template>
+    </nav>
+  </header>
+  

@@ -14,10 +14,10 @@
           <mat-icon>inventory_2</mat-icon>
         </div>
         <mat-card-title class="product-title">{{ product.name }}</mat-card-title>
-        <mat-card-subtitle class="product-price">{{ product.price | currency:'BRL' }}</mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-content class="product-content">
+        <p>Preço: <span>{{ product.price }}</span></p>
         <p>Quantidade: <span>{{ product.stockQuantity }}</span></p>
       </mat-card-content>
 
