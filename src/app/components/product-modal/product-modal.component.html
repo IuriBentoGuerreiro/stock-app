@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>
+  <mat-icon>inventory_2</mat-icon>
+  {{ product.id ? 'Editar Produto' : 'Novo Produto' }}
+</h2>
+
+<mat-dialog-content>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Nome</mat-label>
+    <input matInput [(ngModel)]="product.name" name="name" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Preço</mat-label>
+    <input matInput 
+           [value]="product.price | currency: 'BRL': 'symbol'" 
+           (input)="formatPriceInput($event)" 
+           name="price" 
+           required />
+  </mat-form-field>  
+
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Quantidade</mat-label>
+    <input matInput type="number" [(ngModel)]="product.stockQuantity" name="quantity" required />
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="onSave()">Salvar</button>
+</mat-dialog-actions>

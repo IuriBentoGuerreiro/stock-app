@@ -1,0 +1,180 @@
+$product-background: #f5f5f5;
+$product-card-background: #ffffff;
+$product-primary: #4caf50;
+$product-secondary: #ff7043;
+$product-danger: #e53935;
+$product-text-primary: #333333;
+$product-text-secondary: #666666;
+
+.product-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: $product-background;
+
+  .product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+
+    .title {
+      font-size: 26px;
+      font-weight: bold;
+      color: $product-text-primary;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #fff;
+      background-color: $product-primary;
+      border: none;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      mat-icon {
+        margin-right: 8px;
+        font-size: 18px;
+      }
+
+      &:hover {
+        background-color: darken($product-primary, 8%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba($product-primary, 0.4);
+      }
+    }
+  }
+
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+      background-color: $product-card-background;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease-in-out;
+
+      &:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      }
+
+      .product-card-header {
+        display: flex;
+        align-items: center;
+        padding: 16px;
+        background-color: $product-primary;
+        color: #fff;
+        border-radius: 8px 8px 0 0;
+
+        .product-avatar {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 16px;
+          padding: 8px;
+          background-color: #fff;
+          border-radius: 50%;
+
+          mat-icon {
+            color: $product-primary;
+          }
+        }
+
+        .product-title {
+          font-size: 20px;
+          font-weight: bold;
+        }
+
+        .product-price {
+          font-size: 16px;
+          margin-top: 4px;
+        }
+      }
+
+      .product-content {
+        padding: 16px;
+        font-size: 14px;
+        color: $product-text-secondary;
+
+        span {
+          font-weight: bold;
+        }
+      }
+
+      .product-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        padding: 12px 16px;
+        background-color: $product-background;
+        border-radius: 0 0 8px 8px;
+
+        button {
+          display: flex;
+          align-items: center;
+          padding: 10px 18px;
+          font-size: 14px;
+          font-weight: bold;
+          color: #fff;
+          border: none;
+          border-radius: 25px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+          mat-icon {
+            margin-right: 6px;
+            font-size: 18px;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        .edit-button {
+          background-color: $product-secondary;
+
+          &:hover {
+            background-color: darken($product-secondary, 10%);
+            transform: scale(1.03);
+            box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+          }
+
+          &:focus {
+            box-shadow: 0 0 0 3px rgba($product-secondary, 0.4);
+          }
+        }
+
+        .delete-button {
+          background-color: $product-danger;
+
+          &:hover {
+            background-color: darken($product-danger, 10%);
+            transform: scale(1.03);
+            box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+          }
+
+          &:focus {
+            box-shadow: 0 0 0 3px rgba($product-danger, 0.4);
+          }
+        }
+      }
+    }
+  }
+}

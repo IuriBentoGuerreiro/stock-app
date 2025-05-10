@@ -1,0 +1,39 @@
+<div class="product-container">
+  <div class="product-header">
+    <h1 class="title">Gerenciamento de Produtos</h1>
+    <button mat-raised-button color="primary" (click)="openProductModal()">
+      <mat-icon>add</mat-icon>
+      Novo Produto
+    </button>
+  </div>
+
+  <div class="product-list">
+    <mat-card class="product-card" *ngFor="let product of products">
+      <mat-card-header class="product-card-header">
+        <div mat-card-avatar class="product-avatar">
+          <mat-icon>inventory_2</mat-icon>
+        </div>
+        <mat-card-title class="product-title">{{ product.name }}</mat-card-title>
+        <mat-card-subtitle class="product-price">{{ product.price | currency:'BRL' }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content class="product-content">
+        <p>Quantidade: <span>{{ product.stockQuantity }}</span></p>
+      </mat-card-content>
+
+      <mat-card-actions class="product-actions">
+
+        <button mat-stroked-button class="edit-button" (click)="openProductModal(product)">
+         <mat-icon>edit</mat-icon>
+         Editar
+        </button>
+
+      <button mat-stroked-button class="delete-button" (click)="deleteProduct(product.id)">
+       <mat-icon>delete</mat-icon>
+        Deletar
+      </button>
+      
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

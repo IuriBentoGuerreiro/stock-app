@@ -1,11 +1,11 @@
 export class ProductRequest {
     name: string;
-    quantity: number;
+    stockQuantity: number;
     price: number;
 
-    constructor(name: string, quantity: number, price: number) {
+    constructor(name: string, stockQuantity: number, price: number) {
         this.name = name;
-        this.quantity = quantity;
+        this.stockQuantity = stockQuantity;
         this.price = price;
     }
 }
