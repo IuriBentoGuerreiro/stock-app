@@ -1,50 +1,52 @@
-import { MatDialog } from '@angular/material/dialog';
-import { Product } from './../../core/model/Product';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
+
+import { Product } from './../../core/model/Product';
 import { ProductRequest } from '../../core/dtos/ProductRequest';
 import { ProductService } from './../../core/services/product.service';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { ProductModalComponent } from '../product-modal/product-modal.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatIcon } from '@angular/material/icon';
+import { PaginatorComponent } from '../paginator/paginator.component';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatCardModule, MatIcon],
+  imports: [CommonModule, FormsModule, MatCardModule, MatIconModule, PaginatorComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
-export class ProductComponent {
+export class ProductComponent implements OnInit {
   products: Product[] = [];
+  totalElements: number = 0;
+  page: number = 0;
+  size: number = 5;
 
   constructor(private dialog: MatDialog, private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.productService.getAllProducts().subscribe((products) => {
-      this.products = products;
-    });
-  }  
+    this.getAllProducts();
+  }
 
-  getAllProducts() {
-    this.productService.getAllProducts().subscribe(
+  getAllProducts(): void {
+    this.productService.getAllProducts(this.page, this.size).subscribe(
       (response) => {
-        console.log(response);
+        this.products = response.content;
+        this.totalElements = response.totalElements;
       },
       (error) => {
-        console.error('Error fetching products:', error);
+        console.error('Erro ao buscar produtos:', error);
       }
     );
   }
 
-  getProductById(id: number) {
+  getProductById(id: number): void {
     this.productService.getProductById(id).subscribe(
-      (response) => {
-        console.log(response);
-      },
       (error) => {
-        console.error('Error fetching product by ID:', error);
+        console.error('Erro ao buscar produto por ID:', error);
       }
     );
   }
@@ -53,7 +55,7 @@ export class ProductComponent {
     this.productService.saveProduct(product).subscribe({
       next: (savedProduct) => {
         console.log('Produto salvo com sucesso:', savedProduct);
-        this.products = [...this.products, savedProduct];
+        this.getAllProducts();
       },
       error: (error) => {
         console.error('Erro ao salvar produto:', error);
@@ -61,37 +63,35 @@ export class ProductComponent {
     });
   }
 
-  updateProduct(id: number, product: ProductRequest) {
+  updateProduct(id: number, product: ProductRequest): void {
     this.productService.updateProduct(id, product).subscribe({
       next: (updatedProduct) => {
-        console.log('Product updated successfully:', updatedProduct);
-        this.products = this.products.map(p => 
-          p.id === id ? updatedProduct : p
-        );
+        console.log('Produto atualizado com sucesso:', updatedProduct);
+        this.getAllProducts();
       },
       error: (error) => {
-        console.error('Error updating product:', error);
+        console.error('Erro ao atualizar produto:', error);
       }
     });
-  }  
+  }
 
   deleteProduct(id?: number): void {
     if (!id) {
       console.error('ID do produto é indefinido');
       return;
     }
-  
+
     this.productService.deleteProduct(id).subscribe({
       next: () => {
         console.log('Produto deletado com sucesso');
-        this.products = this.products.filter(product => product.id !== id);
+        this.getAllProducts();
       },
       error: (error) => {
         console.error('Erro ao deletar produto:', error);
       }
     });
-  }  
-  
+  }
+
   openProductModal(product?: Product): void {
     const dialogRef = this.dialog.open(ProductModalComponent, {
       width: '500px',
@@ -107,5 +107,12 @@ export class ProductComponent {
         }
       }
     });
+  }
+
+  onPageChange(event: PageEvent): void {
+    console.log('Página mudou:', event);
+    this.page = event.pageIndex;
+    this.size = event.pageSize;
+    this.getAllProducts();
   }
 }

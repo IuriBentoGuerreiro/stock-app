@@ -10,6 +10,11 @@
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Descrição</mat-label>
+    <input matInput [(ngModel)]="product.description" name="description" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="full-width">
     <mat-label>Preço</mat-label>
     <input matInput 
            [value]="product.price | currency: 'BRL': 'symbol'" 

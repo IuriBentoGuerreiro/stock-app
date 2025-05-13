@@ -41,6 +41,9 @@ export class SaleModalComponent {
     idProduct: 0,
   };
 
+  size = 0;
+  page= 0;
+  
   saleResponse: any;
 
   constructor(
@@ -61,10 +64,7 @@ export class SaleModalComponent {
   }
 
   getProducts(): void {
-    this.productService.getAllProducts().subscribe({
-      next: (response) => {
-        this.products = response;
-      },
+    this.productService.getAllProducts(this.size, this.page).subscribe({
       error: (error) => {
         console.error('Erro ao carregar produtos:', error);
       }
