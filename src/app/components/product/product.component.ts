@@ -10,7 +10,7 @@ import { Product } from './../../core/model/Product';
 import { ProductRequest } from '../../core/dtos/ProductRequest';
 import { ProductService } from './../../core/services/product.service';
 import { ProductModalComponent } from '../product-modal/product-modal.component';
-import { PaginatorComponent } from '../paginator/paginator.component';
+import { PaginatorComponent } from '../../shared/paginator/paginator.component';
 
 @Component({
   selector: 'app-product',
@@ -21,9 +21,10 @@ import { PaginatorComponent } from '../paginator/paginator.component';
 })
 export class ProductComponent implements OnInit {
   products: Product[] = [];
+  productName: string = '';
   totalElements: number = 0;
   page: number = 0;
-  size: number = 5;
+  size: number = 12;
 
   constructor(private dialog: MatDialog, private productService: ProductService) {}
 
@@ -32,7 +33,7 @@ export class ProductComponent implements OnInit {
   }
 
   getAllProducts(): void {
-    this.productService.getAllProducts(this.page, this.size).subscribe(
+    this.productService.getAllProducts(this.page, this.size, this.productName).subscribe(
       (response) => {
         this.products = response.content;
         this.totalElements = response.totalElements;

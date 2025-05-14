@@ -1,17 +1,17 @@
 import { Product } from "./Product";
+import { SaleItem } from "./SaleItem";
 
 export class Sale{
     id?: number;
-    client: string;
-    quantity: number;
-    totalPrice: number;
-    product: Product;
+    clientName: string;
+    saleDate: Date;
+    totalAmount: number;
+    items: SaleItem[];
 
-    constructor(id: number, client: string, quantity: number, totalPrice: number, product: Product) {
-        this.id = id;
-        this.client = client;
-        this.quantity = quantity;
-        this.totalPrice = totalPrice;
-        this.product = product;
+    constructor(saleDate: Date, clientName: string, totalAmount: number, items: SaleItem[]) {
+        this.saleDate = saleDate;
+        this.clientName = clientName;
+        this.totalAmount = totalAmount;
+        this.items = items;
     }
 }

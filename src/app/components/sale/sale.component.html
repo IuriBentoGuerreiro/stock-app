@@ -1,0 +1,38 @@
+<div class="sale-wrapper">
+  <div class="header">
+    <h2>Histórico de Vendas</h2>
+    <button class="minimal-btn" (click)="openSaleModal()">
+      <mat-icon>add</mat-icon>
+      Nova Venda
+    </button>
+  </div>
+
+
+  <div *ngIf="sales.length; else noSales" class="sales-grid">
+    <div *ngFor="let sale of sales" class="sale-card">
+      <div class="sale-header">
+        <span class="client-name">{{ sale.clientName }}</span>
+        <span class="sale-date">{{ sale.saleDate | date: 'dd/MM/yyyy HH:mm' }}</span>
+      </div>
+      <div class="sale-body">
+        <div class="sale-items">
+          <mat-icon>shopping_cart</mat-icon>
+          <span class="items-list">{{ sale.items | saleItemsFormat }}</span>
+        </div>
+        <div class="sale-total">
+          <span>Total:</span>
+          <strong>R$ {{ sale.totalAmount.toFixed(2) }}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noSales>
+    <p class="empty-message">Nenhuma venda cadastrada.</p>
+  </ng-template>
+
+  <app-paginator 
+    [totalElements]="totalElements"
+    (pageChange)="onPageChange($event)">
+  </app-paginator>
+</div>

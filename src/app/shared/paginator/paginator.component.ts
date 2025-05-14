@@ -10,7 +10,7 @@ import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/p
   styleUrl: './paginator.component.scss'
 })
 export class PaginatorComponent {
-  pageSize = 6;
+  pageSize = 12;
   currentPage = 0;
 
   @Input() totalElements!: number;

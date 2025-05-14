@@ -1,18 +1,19 @@
 import { Product } from "../model/Product";
+import { SaleItem } from "../model/SaleItem";
 
 export class SaleResponse {
         id?: number;
-        client: string;
-        quantity: number;
-        totalPrice: number;
-        product: Product;
-    
-        constructor(id: number, client: string, quantity: number, totalPrice: number, product: Product) {
+        clientName: string;
+        saleDate: Date;
+        totalAmount: number;
+        items: SaleItem[];
+
+        constructor(id: number, clientName: string, saleDate: Date, totalAmount: number, items: SaleItem[]) {
             this.id = id;
-            this.client = client;
-            this.quantity = quantity;
-            this.totalPrice = totalPrice;
-            this.product = product;
+            this.clientName = clientName;
+            this.saleDate = saleDate;
+            this.totalAmount = totalAmount;
+            this.items = items;
         }
     
 }

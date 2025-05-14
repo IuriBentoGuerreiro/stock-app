@@ -1,11 +1,11 @@
-export class SaleRequest {
-    client: string;
-    quantity: number;
-    idProduct: number;
+import { SaleItemRequest } from "./SaleItemRequest";
 
-    constructor(client: string, quantity: number, idProduct: number) {
-        this.client = client;
-        this.quantity = quantity;
-        this.idProduct = idProduct;
+export class SaleRequest {
+    clientName: string;
+    saleItems: SaleItemRequest[];
+
+    constructor(clientName: string, saleItems: SaleItemRequest[]) {
+        this.clientName = clientName;
+        this.saleItems = saleItems;
     }
 }

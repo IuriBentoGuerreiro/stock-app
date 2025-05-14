@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>
+  <mat-icon>shopping_cart</mat-icon>
+  Registrar Venda
+</h2>
+
+<mat-dialog-content>
+  <form (ngSubmit)="onSave()">
+    
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Nome do Cliente</mat-label>
+      <input matInput [(ngModel)]="saleRequest.clientName" name="clientName" required>
+    </mat-form-field>
+
+    <div class="product-form">
+      
+      <mat-form-field appearance="fill" class="half-width">
+        <mat-label>Produto</mat-label>
+        <mat-select [(ngModel)]="currentItem.productId" name="productId" required>
+          <mat-option *ngFor="let product of products" [value]="product.id">
+            {{ product.name }} - R$ {{ product.price.toFixed(2) }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="half-width">
+        <mat-label>Quantidade</mat-label>
+        <input matInput type="number" [(ngModel)]="currentItem.quantity" name="quantity" min="1" required>
+      </mat-form-field>
+
+      <button mat-stroked-button color="primary" type="button" (click)="addItem()">Adicionar Produto</button>
+    </div>
+
+    <mat-divider class="my-3"></mat-divider>
+
+    <div *ngIf="saleRequest.saleItems.length > 0">
+      <h3>Itens da Venda</h3>
+      <ul>
+        <li *ngFor="let item of saleRequest.saleItems; let i = index">
+          {{ getProductById(item.productId)?.name || 'Produto Não Encontrado' }} - 
+          {{ item.quantity }} un - 
+          R$ {{ (getProductById(item.productId)?.price ?? 0) * item.quantity | number: '1.2-2' }}
+          <button mat-icon-button color="warn" (click)="removeItem(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </li>
+      </ul>
+
+      <p><strong>Total:</strong> R$ {{ getTotal() | number: '1.2-2' }}</p>
+    </div>
+
+    <mat-dialog-actions align="end">
+      <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+      <button mat-flat-button color="primary" type="submit">Salvar Venda</button>
+    </mat-dialog-actions>
+
+  </form>
+</mat-dialog-content>
