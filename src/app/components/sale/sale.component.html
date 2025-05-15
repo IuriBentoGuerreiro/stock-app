@@ -7,7 +7,6 @@
     </button>
   </div>
 
-
   <div *ngIf="sales.length; else noSales" class="sales-grid">
     <div *ngFor="let sale of sales" class="sale-card">
       <div class="sale-header">
@@ -22,6 +21,13 @@
         <div class="sale-total">
           <span>Total:</span>
           <strong>R$ {{ sale.totalAmount.toFixed(2) }}</strong>
+
+          <div class="sales-action">
+            <button mat-stroked-button class="edit-button" (click)="openSaleModal()">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
+          </div>
         </div>
       </div>
     </div>
