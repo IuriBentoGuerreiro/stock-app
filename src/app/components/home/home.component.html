@@ -1,0 +1,57 @@
+<div class="home-container">
+  <div class="background-gradient"></div>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">Controle Total das Vendas</h1>
+          <p class="hero-subtitle">Simplifique o gerenciamento de vendas e produtos com eficiência e praticidade.</p>
+          
+          <div class="hero-actions">
+            <button mat-flat-button color="primary" routerLink="/sales">
+              <mat-icon>add_shopping_cart</mat-icon>
+              Nova Venda
+            </button>
+            <button mat-stroked-button color="accent" routerLink="/products">
+              <mat-icon>inventory_2</mat-icon>
+              Ver Produtos
+            </button>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="image-container">
+            <img src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Gestão de Vendas">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <h2 class="section-title">Recursos Principais</h2>
+        <div class="features-grid">
+          <div class="feature-card" *ngFor="let feature of features">
+            <div class="icon-wrapper">
+              <mat-icon>{{ feature.icon }}</mat-icon>
+            </div>
+            <h3>{{ feature.title }}</h3>
+            <p>{{ feature.description }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Pronto para começar?</h2>
+          <p>Gerencie seu negócio com mais eficiência e tome decisões baseadas em dados reais.</p>
+          <button mat-flat-button color="primary" routerLink="/dashboard">
+            Começar Agora
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

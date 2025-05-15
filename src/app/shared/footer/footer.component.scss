@@ -1,0 +1,40 @@
+@import 'styles';
+
+.app-footer {
+  background-color: $neutral-800;
+  color: $neutral-300;
+  padding: $space-8 0;
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .copyright {
+      p {
+        margin-bottom: 0;
+      }
+    }
+    
+    .footer-links {
+      display: flex;
+      gap: $space-6;
+      
+      a {
+        color: $neutral-300;
+        transition: $transition-normal;
+        
+        &:hover {
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: $space-4;
+  padding-right: $space-4;
+}
