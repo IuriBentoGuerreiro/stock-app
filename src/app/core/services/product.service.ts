@@ -4,6 +4,7 @@ import { ProductResponse } from './../dtos/ProductResponse';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ProductFilter } from '../model/ProductFilter';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +19,11 @@ export class ProductService {
     return this.http.post<ProductResponse>(`${this.baseUrl}`, product);
   }
 
-  getAllProducts(page: number, size: number, productName: string): Observable<Pageable<ProductResponse>> {
+  getAllProducts(page: number, size: number, productFilter: ProductFilter): Observable<Pageable<ProductResponse>> {
   const httpParams = new HttpParams()
     .set('page', page.toString())
     .set('size', size.toString())
-    .set('productName', productName);
+    .set('productName', productFilter.productName);
 
   return this.http.get<Pageable<ProductResponse>>(`${this.baseUrl}`, { params: httpParams });
 }

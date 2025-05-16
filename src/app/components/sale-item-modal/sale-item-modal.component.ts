@@ -16,6 +16,7 @@ import { Sale } from '../../core/model/Sale';
 import { Product } from '../../core/model/Product';
 import { SaleItemRequest } from '../../core/dtos/SaleItemRequest';
 import { PageEvent } from '@angular/material/paginator';
+import { ProductFilter } from '../../core/model/ProductFilter';
 
 @Component({
   selector: 'app-sale-modal',
@@ -36,6 +37,8 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class SaleItemModalComponent implements OnInit {
   products: Product[] = [];
+  productFilter: ProductFilter = {productName: ''};
+  
   saleRequest: SaleRequest = { clientName: '', saleItems: [] };
   currentItem: SaleItemRequest = { productId: 0, quantity: 1 };
   saleResponse?: SaleResponse;
@@ -69,7 +72,7 @@ export class SaleItemModalComponent implements OnInit {
   }
 
   private loadProducts(): void {
-    this.productService.getAllProducts(0, 100, '').subscribe({
+    this.productService.getAllProducts(0, 100, this.productFilter).subscribe({
       next: (response) => {
         this.products = response.content;
       },

@@ -15,6 +15,7 @@ import { SaleItemsFormatPipe } from '../../shared/pipes/sale-items-format.pipe';
 import { PageEvent } from '@angular/material/paginator';
 import { PaginatorComponent } from '../../shared/paginator/paginator.component';
 import { SaleItemModalComponent } from '../sale-item-modal/sale-item-modal.component';
+import { ProductFilter } from '../../core/model/ProductFilter';
 
 @Component({
   selector: 'app-sale',
@@ -34,7 +35,8 @@ export class SaleComponent implements OnInit {
 
   clientName = '';
   searchTerm = '';
-  productName = '';
+  productFilter: ProductFilter = {productName: ''};
+  
 
   modalOpen = false;
 
@@ -56,7 +58,7 @@ export class SaleComponent implements OnInit {
   }
 
   loadProducts(): void {
-    this.productService.getAllProducts(0, 100, this.productName).subscribe({
+    this.productService.getAllProducts(0, 100, this.productFilter).subscribe({
       next: res => {
         this.products = res.content;
         console.log('Produtos carregados:', res);
