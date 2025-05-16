@@ -1,6 +1,19 @@
 <div class="product-wrapper">
   <div class="header">
     <h2>Gerenciamento de Produtos</h2>
+
+    <div class="search-container">
+      <input
+        type="text"
+        placeholder="Buscar produto..."
+        [(ngModel)]="productFilter.productName"
+        (keyup.enter)="getAllProducts()"
+      />
+      <button class="icon-btn" (click)="getAllProducts()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+
     <button class="minimal-btn" (click)="openProductModal()">
       <mat-icon>add</mat-icon>
       Novo Produto

@@ -5,18 +5,44 @@
 
 <mat-dialog-content>
   <form (ngSubmit)="onSave()">
-    
+
     <mat-form-field appearance="fill" class="full-width">
       <mat-label>Nome do Cliente</mat-label>
-      <input matInput [(ngModel)]="saleRequest.clientName" name="clientName" required>
+      <input matInput [(ngModel)]="saleRequest.clientName" name="clientName" required />
     </mat-form-field>
 
     <div class="product-form">
-      
+
       <mat-form-field appearance="fill" class="half-width">
         <mat-label>Produto</mat-label>
-        <mat-select [(ngModel)]="currentItem.productId" name="productId" required>
-          <mat-option *ngFor="let product of products" [value]="product.id">
+        <mat-select
+          #productSelect
+          [(ngModel)]="currentItem.productId"
+          name="productId"
+          required
+          (openedChange)="onProductSelectOpened($event)"
+        >
+          <mat-select-trigger>
+            {{ getProductById(currentItem.productId)?.name || 'Selecione um produto' }}
+          </mat-select-trigger>
+
+          <mat-option>
+            <input
+              matInput
+              placeholder="Buscar produto..."
+              [(ngModel)]="productFilter.productName"
+              name="productFilter"
+              (ngModelChange)="onSearchChange(productSelect)"
+              (click)="$event.stopPropagation()"
+              autocomplete="off"
+              autofocus
+            />
+          </mat-option>
+
+          <mat-option
+            *ngFor="let product of filteredProducts"
+            [value]="product.id"
+          >
             {{ product.name }} - R$ {{ product.price.toFixed(2) }}
           </mat-option>
         </mat-select>
@@ -24,10 +50,24 @@
 
       <mat-form-field appearance="fill" class="half-width">
         <mat-label>Quantidade</mat-label>
-        <input matInput type="number" [(ngModel)]="currentItem.quantity" name="quantity" min="1" required>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="currentItem.quantity"
+          name="quantity"
+          min="1"
+          required
+        />
       </mat-form-field>
 
-      <button mat-stroked-button color="primary" type="button" (click)="addItem()">Adicionar Produto</button>
+      <button
+        mat-stroked-button
+        color="primary"
+        type="button"
+        (click)="addItem()"
+      >
+        Adicionar Produto
+      </button>
     </div>
 
     <mat-divider class="my-3"></mat-divider>
@@ -36,16 +76,16 @@
       <h3>Itens da Venda</h3>
       <ul>
         <li *ngFor="let item of saleRequest.saleItems; let i = index">
-          {{ getProductById(item.productId)?.name || 'Produto Não Encontrado' }} - 
-          {{ item.quantity }} un - 
-          R$ {{ (getProductById(item.productId)?.price ?? 0) * item.quantity | number: '1.2-2' }}
+          {{ getProductById(item.productId)?.name || 'Produto Não Encontrado' }} -
+          {{ item.quantity }} un -
+          R$ {{ (getProductById(item.productId)?.price ?? 0) * item.quantity | number:'1.2-2' }}
           <button mat-icon-button color="warn" (click)="removeItem(i)">
             <mat-icon>delete</mat-icon>
           </button>
         </li>
       </ul>
 
-      <p><strong>Total:</strong> R$ {{ getTotal() | number: '1.2-2' }}</p>
+      <p><strong>Total:</strong> R$ {{ getTotal() | number:'1.2-2' }}</p>
     </div>
 
     <mat-dialog-actions align="end">

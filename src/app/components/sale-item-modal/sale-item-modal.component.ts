@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelect, MatSelectModule } from '@angular/material/select';
 import { MatDividerModule } from '@angular/material/divider';
 import { SaleRequest } from '../../core/dtos/SaleRequest';
 import { SaleService } from '../../core/services/sale.service';
@@ -36,16 +36,19 @@ import { ProductFilter } from '../../core/model/ProductFilter';
   styleUrls: ['./sale-item-modal.component.scss']
 })
 export class SaleItemModalComponent implements OnInit {
+  @ViewChild('productSelect') productSelect!: MatSelect;
+
   products: Product[] = [];
-  productFilter: ProductFilter = {productName: ''};
-  
+  productFilter: ProductFilter = { productName: '' };
+  isSelectOpened = false;
+
   saleRequest: SaleRequest = { clientName: '', saleItems: [] };
   currentItem: SaleItemRequest = { productId: 0, quantity: 1 };
   saleResponse?: SaleResponse;
   sales: Sale[] = [];
-  totalElements: number = 0;
-  page: number = 0;
-  size: number = 12;
+  totalElements = 0;
+  page = 0;
+  size = 12;
 
   constructor(
     private saleService: SaleService,
@@ -87,6 +90,8 @@ export class SaleItemModalComponent implements OnInit {
     if (product && this.currentItem.quantity > 0) {
       this.saleRequest.saleItems.push({ ...this.currentItem });
       this.currentItem = { productId: 0, quantity: 1 };
+      this.productFilter.productName = '';
+      this.productSelect.close();
     }
   }
 
@@ -109,12 +114,10 @@ export class SaleItemModalComponent implements OnInit {
 
     this.saleService.saveSale(this.saleRequest).subscribe({
       next: (response) => {
-        console.log('Venda salva com sucesso:', response);
         this.loadSales();
         this.dialogRef.close(response);
       },
-      error: (error) => {
-        console.error('Erro ao salvar venda:', error);
+      error: () => {
         alert('Erro ao salvar venda.');
       }
     });
@@ -132,5 +135,25 @@ export class SaleItemModalComponent implements OnInit {
     this.page = event.pageIndex;
     this.size = event.pageSize;
     this.loadSales();
+  }
+
+  get filteredProducts(): Product[] {
+    const search = this.productFilter.productName?.toLowerCase() || '';
+    return this.products.filter(product =>
+      product.name.toLowerCase().includes(search)
+    );
+  }
+
+  onProductSelectOpened(opened: boolean): void {
+    this.isSelectOpened = opened;
+    if (opened) {
+      this.productFilter.productName = '';
+    }
+  }
+
+  onSearchChange(select: MatSelect): void {
+    if (!this.isSelectOpened) {
+      setTimeout(() => select.open());
+    }
   }
 }

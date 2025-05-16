@@ -12,11 +12,19 @@ import { ProductService } from './../../core/services/product.service';
 import { ProductModalComponent } from '../product-modal/product-modal.component';
 import { PaginatorComponent } from '../../shared/paginator/paginator.component';
 import { ProductFilter } from '../../core/model/ProductFilter';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatCardModule, MatIconModule, PaginatorComponent],
+  imports: [
+    CommonModule,
+     FormsModule,
+     MatCardModule, 
+     MatIconModule,
+     PaginatorComponent,
+     MatFormFieldModule
+    ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
@@ -34,15 +42,19 @@ export class ProductComponent implements OnInit {
   }
 
   getAllProducts(): void {
-    this.productService.getAllProducts(this.page, this.size, this.productFilter).subscribe(
-      (response) => {
-        this.products = response.content;
-        this.totalElements = response.totalElements;
-      },
-      (error) => {
-        console.error('Erro ao buscar produtos:', error);
-      }
-    );
+  const filter = {
+    productName: this.productFilter.productName?.trim() || ''
+  };
+
+  this.productService.getAllProducts(this.page, this.size, filter).subscribe(
+    (response) => {
+      this.products = response.content;
+      this.totalElements = response.totalElements;
+    },
+    (error) => {
+      console.error('Erro ao buscar produtos:', error);
+     }
+   );
   }
 
   getProductById(id: number): void {
