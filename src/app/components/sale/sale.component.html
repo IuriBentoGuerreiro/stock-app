@@ -1,4 +1,5 @@
 <div class="sale-wrapper">
+
   <div class="header">
     <h2>Histórico de Vendas</h2>
     <button class="minimal-btn" (click)="openSaleModal()">
@@ -6,6 +7,48 @@
       Nova Venda
     </button>
   </div>
+
+  <div class="filter-form">
+  <div class="filter-field client-name">
+    <label for="clientName">Cliente</label>
+    <input
+      id="clientName"
+      type="text"
+      [(ngModel)]="saleFilter.clientName"
+      name="clientName"
+      placeholder="Nome do cliente"
+      class="filter-input"
+    />
+  </div>
+
+  <div class="filter-field">
+    <label for="startDate">Data Início</label>
+    <input
+      id="startDate"
+      type="date"
+      [(ngModel)]="saleFilter.startDate"
+      name="startDate"
+      class="filter-input"
+    />
+  </div>
+
+  <div class="filter-field">
+    <label for="endDate">Data Fim</label>
+    <input
+      id="endDate"
+      type="date"
+      [(ngModel)]="saleFilter.endDate"
+      name="endDate"
+      class="filter-input"
+    />
+  </div>
+
+  <div class="filter-actions">
+    <button type="button" class="filter-btn" (click)="onFilterChange()">Filtrar</button>
+    <button type="button" class="clear-btn" (click)="clearFilters()">Limpar</button>
+  </div>
+</div>
+
 
   <div *ngIf="sales.length; else noSales" class="sales-grid">
     <div *ngFor="let sale of sales" class="sale-card">
@@ -24,9 +67,9 @@
 
           <div class="sales-action">
             <button mat-stroked-button class="edit-button" (click)="openSaleModal()">
-          <mat-icon>edit</mat-icon>
-          Editar
-        </button>
+              <mat-icon>edit</mat-icon>
+              Editar
+            </button>
           </div>
         </div>
       </div>

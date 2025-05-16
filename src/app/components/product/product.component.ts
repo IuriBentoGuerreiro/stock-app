@@ -11,7 +11,7 @@ import { ProductRequest } from '../../core/dtos/ProductRequest';
 import { ProductService } from './../../core/services/product.service';
 import { ProductModalComponent } from '../product-modal/product-modal.component';
 import { PaginatorComponent } from '../../shared/paginator/paginator.component';
-import { ProductFilter } from '../../core/model/ProductFilter';
+import { ProductFilter } from '../../core/dtos/ProductFilter';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({

@@ -15,12 +15,22 @@ import { SaleItemsFormatPipe } from '../../shared/pipes/sale-items-format.pipe';
 import { PageEvent } from '@angular/material/paginator';
 import { PaginatorComponent } from '../../shared/paginator/paginator.component';
 import { SaleItemModalComponent } from '../sale-item-modal/sale-item-modal.component';
-import { ProductFilter } from '../../core/model/ProductFilter';
+import { ProductFilter } from '../../core/dtos/ProductFilter';
+import { SaleFilter } from '../../core/dtos/SaleFilter';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-sale',
   standalone: true,
-  imports: [CommonModule, MatIconModule, SaleItemsFormatPipe, PaginatorComponent],
+  imports: [
+      FormsModule,
+      CommonModule,
+      MatIconModule,
+      SaleItemsFormatPipe,
+      PaginatorComponent,
+      MatFormFieldModule
+    ],
   templateUrl: './sale.component.html',
   styleUrl: './sale.component.scss'
 })
@@ -36,6 +46,7 @@ export class SaleComponent implements OnInit {
   clientName = '';
   searchTerm = '';
   productFilter: ProductFilter = {productName: ''};
+  saleFilter: SaleFilter = {clientName: '', startDate: '', endDate: ''};
   
 
   modalOpen = false;
@@ -68,7 +79,7 @@ export class SaleComponent implements OnInit {
   }
 
   loadSales(): void {
-    this.saleService.getAllSales(this.page, this.size).subscribe({
+    this.saleService.getAllSales(this.page, this.size, this.saleFilter).subscribe({
       next: response => {
         this.sales = response.content;
         this.totalElements = response.totalElements;
@@ -172,4 +183,14 @@ export class SaleComponent implements OnInit {
       this.size = event.pageSize;
       this.loadSales();
     }
+
+    onFilterChange(): void {
+     this.page = 0;
+     this.loadSales();
+}   
+
+clearFilters(): void {
+  this.saleFilter = { clientName: '', startDate: '', endDate: '' };
+  this.onFilterChange();
+}
 }

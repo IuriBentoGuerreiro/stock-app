@@ -4,7 +4,7 @@ import { ProductResponse } from './../dtos/ProductResponse';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ProductFilter } from '../model/ProductFilter';
+import { ProductFilter } from '../dtos/ProductFilter';
 
 @Injectable({
   providedIn: 'root'

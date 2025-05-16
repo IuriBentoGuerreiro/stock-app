@@ -16,7 +16,8 @@ import { Sale } from '../../core/model/Sale';
 import { Product } from '../../core/model/Product';
 import { SaleItemRequest } from '../../core/dtos/SaleItemRequest';
 import { PageEvent } from '@angular/material/paginator';
-import { ProductFilter } from '../../core/model/ProductFilter';
+import { ProductFilter } from '../../core/dtos/ProductFilter';
+import { SaleFilter } from '../../core/dtos/SaleFilter';
 
 @Component({
   selector: 'app-sale-modal',
@@ -39,6 +40,7 @@ export class SaleItemModalComponent implements OnInit {
   @ViewChild('productSelect') productSelect!: MatSelect;
 
   products: Product[] = [];
+  saleFilter: SaleFilter = {clientName: '', startDate: '', endDate: ''};
   productFilter: ProductFilter = { productName: '' };
   isSelectOpened = false;
 
@@ -63,7 +65,7 @@ export class SaleItemModalComponent implements OnInit {
   }
 
   loadSales(): void {
-    this.saleService.getAllSales(this.page, this.size).subscribe({
+    this.saleService.getAllSales(this.page, this.size, this.saleFilter).subscribe({
       next: (response) => {
         this.sales = response.content;
         this.totalElements = response.totalElements;
