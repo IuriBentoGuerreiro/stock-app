@@ -1,27 +1,69 @@
-# StockApp
+# 📦 Sistema de Controle de Estoque e Vendas
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+Este projeto é um sistema simples de controle de estoque com histórico de vendas, desenvolvido com o objetivo de exercitar habilidades de frontend e dar vida a um backend que já existia. Ao revisitar projetos antigos, percebi que esse ainda não tinha uma interface — então resolvi me desafiar e criar um frontend completo com Angular.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🛠️ Tecnologias Utilizadas
 
-## Code scaffolding
+* **Angular 17+**
+* **Angular Material**
+* **TypeScript**
+* **SCSS (com design tokens customizados)**
+* **Responsividade com Flexbox**
+* **Pipes personalizados**
+* **Componentes reutilizáveis**
+* **Paginator (paginação de resultados)**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## ✨ Funcionalidades
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+* Cadastro de vendas com:
 
-## Running unit tests
+  * Nome do cliente
+  * Lista de produtos
+  * Valor total
+  * Data da venda
+* Filtro por:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  * Nome do cliente
+  * Intervalo de datas
+* Exibição dos resultados em cards
+* Paginação dos dados (componente `Paginator`)
+* Formulário de filtro com layout moderno, inputs transparentes e botões estilizados
+* Responsividade completa
+* Validação básica de formulário
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## 🚀 Como rodar o projeto
 
-## Further help
+```bash
+# Instalar as dependências
+npm install
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Rodar localmente
+ng serve
+
+# Acesse em
+http://localhost:4200
+```
+
+---
+
+## 📌 Observações
+
+Este projeto foi construído com foco em praticar boas práticas de frontend e experimentar componentes avançados do Angular Material. O código é modular, limpo e fácil de evoluir — refletindo meu aprendizado contínuo como desenvolvedor.
+
+---
+
+## 🤝 Contribuição
+
+Sugestões, melhorias e colaborações são bem-vindas!
+
+---
+
+## 🧠 Lições Aprendidas
+
+> Ao revisitar projetos antigos, percebemos o quanto evoluímos. Criar esse frontend me ajudou a consolidar padrões visuais e reforçar boas práticas com Angular e SCSS. É gratificante ver o progresso — e melhor ainda transformar código esquecido em algo funcional e bonito.
